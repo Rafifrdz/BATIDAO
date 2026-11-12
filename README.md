@@ -1,88 +1,103 @@
 # NO BATIDÃO
 
-Team wall interaktif: badge lanyard yang bisa di-flip, ditarik, dan digeser. Dibuat dengan Next.js, TypeScript, Tailwind CSS, dan komponen shadcn.
+Situs perkenalan tim esport yang dibangun dari template
+[adrianhajdin/award-winning-website](https://github.com/adrianhajdin/award-winning-website)
+(gaya Zentry): hero video full-bleed dengan frame clip-path, judul kata-per-kata,
+bento grid video, dan section contact ber-clip-path.
 
-Mau ikut mengedit? Baca [CONTRIBUTING.md](./CONTRIBUTING.md) untuk panduan clone, edit data tim, ganti foto, dan alur Git.
+Isi, teks, dan badge tim sudah diganti ke BATIDAO. Komponen lanyard badge
+(`components/ui/team-lanyard-rail.tsx`) dipertahankan dan jadi section **Roster**.
 
-## Menjalankan proyek
-
-Prasyarat: **Node.js 20+** dan npm.
+## Menjalankan
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:3000
+npm run build
+npm run typecheck
 ```
 
-Buka <http://localhost:3000>.
+## Alur halaman
 
-Perintah lain:
+| Section | File | Isi |
+| --- | --- | --- |
+| Navbar | `components/zentry/navbar.tsx` | Floating nav, audio toggle, menu mobile |
+| Hero | `components/zentry/hero.tsx` | Video 4 lapis, clip-path frame, wordmark raksasa |
+| About | `components/zentry/about.tsx` | Judul animasi + gambar yang membesar saat di-pin |
+| Features | `components/zentry/features.tsx` | Bento grid video + tilt 3D |
+| **Roster** | `components/zentry/roster-section.tsx` | **Rail badge lanyard (interaktif)** |
+| Story | `components/zentry/story.tsx` | Gambar ber-clip-path + tilt 3D |
+| Contact | `components/zentry/contact.tsx` | CTA gabung + gambar sudut |
+| Footer | `components/zentry/site-footer.tsx` | Bar ungu + sosial |
 
-```bash
-npm run build      # build produksi
-npm start          # jalankan hasil build
-npm run typecheck  # cek TypeScript
-```
+## Aset
 
-## Struktur penting
+| Folder | Isi | Ukuran |
+| --- | --- | --- |
+| `public/videos/` | 4 hero + 5 fitur (mp4) | **48 MB** |
+| `public/img/` | 15 webp | 2,2 MB |
+| `public/fonts/` | zentry, general, circular-web, robert | 188 KB |
+| `public/audio/` | loop.mp3 | 376 KB |
+| `public/team/` | foto anggota | — |
 
-```
-app/
-  page.tsx                        # halaman utama (render demo)
-  globals.css                     # token warna & tema shadcn
-components/
-  ui/team-lanyard-rail.tsx        # komponen lanyard (jangan diubah kecuali perlu)
-  team-lanyard-rail-demo.tsx      # DATA TIM — edit di sini
-public/
-  team/                           # foto anggota
-```
+> ⚠️ 48 MB video itu berat. Sebelum deploy: kompres ke H.264 CRF 28 / 720p,
+> atau ganti dengan WebM. Target di bawah 12 MB total.
 
-## Mengedit anggota tim
+## Mengedit data tim
 
-Semua data ada di `components/team-lanyard-rail-demo.tsx` pada array `LANYARD_DEMO_TEAM`.
-Setiap anggota punya bentuk:
+Semua di `lib/team.ts`:
 
 ```tsx
 {
-  id: "Fathir",                 // unik, dipakai sebagai key React
-  name: "Fathir Izzakky",       // nama di badge
-  role: "Founder Batidao",      // jabatan
-  team: "CEO",                  // baris kecil di bawah role
-  tone: 1,                      // warna 1–5 (lihat --chart-1..5 di globals.css)
-  image: "/team/fathir.jpg",       // path foto di folder public
-  bio: "…",                     // teks di balik badge
-  tags: ["CHAMBER", "Zeroks"],  // chip di balik badge (maks. 3 tampil)
-  links: [                      // link kontak di balik badge (maks. 3 tampil)
-    { label: "Email", href: "#" },
-    { label: "Portfolio", href: "#" },
-  ],
+  id: "fathir",
+  name: "Fathir Izzakky",
+  role: "Founder Batidao",
+  team: "CEO",
+  division: "ceo",        // "ceo" | "core" | "org"
+  tone: 1,                // warna badge 1–5
+  photo: false,           // true kalau file fotonya sudah ada
+  image: "/team/fathir.jpg",
+  bio: "…",
+  tags: ["CHAMBER", "Zeroks"],
+  links: [{ label: "Email", href: "mailto:halo@batidao.gg" }],
 }
 ```
 
-Catatan:
-- `id` harus unik untuk setiap anggota.
-- `image` diawali `/team/...` karena folder `public/team` dipetakan ke URL `/team`.
-- Nama file foto tidak harus sama dengan `id`.
-- Maksimal 3 `tags` dan 3 `links` yang dirender.
+- `photo: false` → badge menampilkan siluet (tidak error).
+- Indikator "4/12 foto" dihitung otomatis.
+- Foto ideal **3:4 potret**, minimal 600×800 px, nama file huruf kecil.
 
-## Mengganti foto
+## Mengganti video / gambar
 
-Taruh foto di `public/team/`, lalu samakan nilai `image` dengan nama file tersebut.
+Semua path absolut dari `public/`:
 
-- Rasio **1:1 (persegi)**, minimal 400×400 px.
-- Wajah di tengah frame karena foto dipotong bulat.
-- Nama file disarankan huruf kecil tanpa spasi, misalnya `fathir.jpg`.
-- Kalau foto belum ada, komponen otomatis menampilkan siluet abu-abu.
+| Slot | File |
+| --- | --- |
+| Hero (4 video, dirotasi) | `/videos/hero-1.mp4` … `hero-4.mp4` |
+| Bento fitur | `/videos/feature-1.mp4` … `feature-5.mp4` |
+| Gambar About | `/img/about.webp` |
+| Gambar Story | `/img/entrance.webp` |
+| Contact | `/img/contact-1.webp`, `contact-2.webp`, `swordman.webp` |
 
-## Kustomisasi tampilan
+Kalau mau ganti video, jaga nama file yang sama — nggak perlu ubah kode.
 
-- Warna badge memakai token `--chart-1` sampai `--chart-5` di `app/globals.css`.
-- Judul, eyebrow, caption, dan tombol CTA diatur lewat props di `TeamLanyardRailDemo`.
-- Komponen mendukung mode terkontrol (`active`, `flipped`), autoplay, dan label bahasa lewat props `labels`.
+## Yang diubah dari template asli
+
+1. **Bug loader diperbaiki.** Template aslinya menahan overlay loading
+   (`z-[100]`) sampai semua video load; kalau satu video gagal, halaman
+   menggantung selamanya. Sekarang ada timeout 4 detik.
+2. **Fallback hero digelapkan.** Frame hero tadinya `bg-blue-75` (terang),
+   jadi teks putih tak terbaca kalau video belum load. Sekarang `bg-black`.
+3. **Menu mobile ditambahkan.** Template asli menyembunyikan link nav di mobile
+   tanpa pengganti.
+4. **Bahasa & isi** diganti ke Indonesia + data tim BATIDAO.
+5. **Ikon** `react-icons` diganti SVG inline (tanpa dependency tambahan).
 
 ## Tech stack
 
-- Next.js 16 (App Router)
+- Next.js 16 (App Router, Turbopack)
 - React 19
 - TypeScript
-- Tailwind CSS v4
-- shadcn/ui (base-nova)
+- Tailwind CSS v4 (token template dipindah ke `@theme` di `app/globals.css`)
+- GSAP 3.15 + ScrollTrigger
+- shadcn/ui (dipakai komponen lanyard)

@@ -4,7 +4,7 @@ Terima kasih sudah ikut mengerjakan **NO BATIDÃO**. Panduan ini untuk teman-tem
 
 ## Prasyarat
 
-- [Git](https://git-scm.com/downloads)
+- [Git](https://git-scm.com/)
 - [Node.js 20+](https://nodejs.org) (sudah termasuk npm)
 - Editor, misalnya [VS Code](https://code.visualstudio.com)
 
@@ -33,26 +33,36 @@ npm run typecheck  # cek error TypeScript
 
 | Mau ubah apa | File |
 | --- | --- |
-| Nama, role, team, bio, tags, links, tone | `components/team-lanyard-rail-demo.tsx` |
-| Judul, eyebrow, caption, tombol CTA | `components/team-lanyard-rail-demo.tsx` (bagian `<TeamLanyardRail …>`) |
-| Foto anggota | folder `public/team/` |
-| Warna badge / tema | `app/globals.css` (`--chart-1` … `--chart-5`) |
-| Tampilan komponen lanyard | `components/ui/team-lanyard-rail.tsx` |
+| Nama, role, team, division, bio, tags, links, tone, photo | `lib/team.ts` |
+| Navbar, menu mobile, audio | `components/zentry/navbar.tsx` |
+| Hero (video + wordmark) | `components/zentry/hero.tsx` |
+| Section about | `components/zentry/about.tsx` |
+| Bento grid divisi | `components/zentry/features.tsx` |
+| Section roster (lanyard) | `components/zentry/roster-section.tsx` |
+| Story | `components/zentry/story.tsx` |
+| Contact / CTA gabung | `components/zentry/contact.tsx` |
+| Footer | `components/zentry/site-footer.tsx` |
+| Warna & font | `app/globals.css` (`@theme`) |
+| Foto anggota | `public/team/` |
+| Video & gambar | `public/videos/`, `public/img/` |
+| Komponen badge lanyard | `components/ui/team-lanyard-rail.tsx` |
 
 ### Bentuk data anggota
 
 ```tsx
 {
-  id: "Fathir",                 // unik, jangan disamakan dengan anggota lain
+  id: "fathir",                 // unik, jangan disamakan dengan anggota lain
   name: "Fathir Izzakky",
   role: "Founder Batidao",
   team: "CEO",
-  tone: 1,                      // 1–5, menentukan warna
-  image: "/team/fathir.jpg",       // file di public/team
+  division: "ceo",              // "ceo" | "core" | "org"
+  tone: 1,                      // 1–5, menentukan warna badge
+  photo: false,                 // true kalau file foto sudah ada
+  image: "/team/fathir.jpg",    // file di public/team
   bio: "Teks di balik badge",
   tags: ["CHAMBER", "Zeroks"],  // maksimal 3 yang tampil
   links: [                      // maksimal 3 yang tampil
-    { label: "Email", href: "#" },
+    { label: "Email", href: "mailto:halo@batidao.gg" },
     { label: "Portfolio", href: "#" },
   ],
 }
@@ -63,16 +73,44 @@ Tips:
 - `id` harus unik.
 - `image` selalu diawali `/team/` karena `public/team` dipetakan ke URL `/team`.
 - Nama file foto tidak harus sama dengan `id` — yang penting nilainya cocok.
+- `division` menentukan anggota muncul di kartu mana pada section Struktur.
 
 ### Foto
 
 - Taruh file di `public/team/`.
-- Rasio **1:1 (persegi)**, minimal 400×400 px, ideal 800×800 px.
+- Rasio **3:4 (potret)**, minimal 600×800 px.
 - Wajah di tengah frame karena foto dipotong bulat.
-- Nama file huruf kecil tanpa spasi, misalnya `fathir.jpg`.
-- Kalau foto belum ada, muncul siluet abu-abu (tidak error).
+- Nama file huruf kecil tanpa spasi, misalnya `fathir.jpg`. **Huruf besar/kecil
+  berpengaruh** saat deploy ke server Linux.
+- Foto otomatis di-grade duotone ungu di hero supaya satu set.
+- Kalau foto belum ada, muncul siluet abu-abu (tidak error). Setelah file
+  diunggah, ubah `photo: false` menjadi `photo: true` supaya ikut terhitung di
+  indikator "4/12 foto".
 
-## 3. Alur Git
+## 3. Kalau mau mengubah animasi
+
+Parallax tidak memakai library. Tiap section yang beranimasi dibungkus
+`<SceneProgress>` (`components/motion/scene-progress.tsx`) yang menulis CSS
+variable `--sp` dari 0 ke 1. Elemen di dalamnya cukup memakai class `p-scene`
+dengan `--sp-y` (total geseran dalam px):
+
+```tsx
+<div className="p-scene" style={{ "--sp-y": "-200px" }}>…</div>
+```
+
+Angka negatif besar = bergerak lebih cepat dari scroll (foreground).
+Angka kecil = nyaris diam (background).
+
+Aturan penting:
+
+- Jangan menaruh `overflow-hidden` pada elemen yang mau pakai
+  `animation-timeline: view()` — parent dengan `overflow: hidden` menjadi scroll
+  container sendiri dan timeline-nya mati. Karena itu reveal memakai
+  IntersectionObserver (`components/motion/reveal-observer.tsx`).
+- Animasikan `transform` dan `opacity` saja, jangan `top`/`left`/`width`.
+- Selalu hormati `prefers-reduced-motion` (sudah ditangani di `globals.css`).
+
+## 4. Alur Git
 
 Selalu tarik perubahan terbaru sebelum mulai:
 
@@ -100,7 +138,7 @@ git push -u origin update-tim
 
 Lalu buka Pull Request di GitHub.
 
-## 4. Alternatif tanpa terminal
+## 5. Alternatif tanpa terminal
 
 Bisa juga lewat browser:
 
