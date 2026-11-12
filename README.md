@@ -2,6 +2,8 @@
 
 Team wall interaktif: badge lanyard yang bisa di-flip, ditarik, dan digeser. Dibuat dengan Next.js, TypeScript, Tailwind CSS, dan komponen shadcn.
 
+Mau ikut mengedit? Baca [CONTRIBUTING.md](./CONTRIBUTING.md) untuk panduan clone, edit data tim, ganti foto, dan alur Git.
+
 ## Menjalankan proyek
 
 Prasyarat: **Node.js 20+** dan npm.
