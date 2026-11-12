@@ -5,18 +5,18 @@ Simpan foto anggota di folder ini, lalu pastikan nilai `image` di
 
 | Anggota | Nama file saat ini |
 | --- | --- |
-| Fathir Izzakky | `ada.jpg` |
-| El Rafi Althaf Zamroni | `ravi.jpg` |
-| Bilhaq Zouvary Brahmantya Jatmiko | `imani.jpg` |
-| Auliya Hisboel | `kenji.jpg` |
-| Ryandra Ghani Firmansyah | `lucia.jpg` |
-| Muhammad Jisrin Syahadata | `mateo.jpg` |
-| Raydisa Putra ACEMAD | `mila.jpg` |
-| Gesangrah Swandaru Pratama | `noah.jpg` |
-| Rafi Firdaus | `sofia.jpg` |
-| Nizar Ramzy | `theo.jpg` |
-| Rafaaryas | `hana.jpg` |
-| Dipa prammansyah | `marcus.jpg` |
+| Fathir Izzakky | `fathir.jpg` |
+| El Rafi Althaf Zamroni | `el-rafi.jpg` |
+| Bilhaq Zouvary Brahmantya Jatmiko | `bilhaq.jpg` |
+| Auliya Hisboel | `auliya.jpg` |
+| Ryandra Ghani Firmansyah | `ryandra.jpg` |
+| Muhammad Jisrin Syahadata | `muhammad.jpg` |
+| Raydisa Putra ACEMAD | `raydisa.jpg` |
+| Gesangrah Swandaru Pratama | `gesangrah.jpg` |
+| Rafi Firdaus | `rafi.jpg` |
+| Nizar Ramzy | `nizar.jpg` |
+| Rafaaryas | `rafaaryas.jpg` |
+| Dipa prammansyah | `dipa.jpg` |
 
 Nama file boleh diganti (misalnya `fathir.jpg`), asalkan nilai `image` di file demo
 ikut diubah. Nama file **tidak harus** sama dengan `id`.

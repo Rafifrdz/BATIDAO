@@ -48,7 +48,7 @@ npm run typecheck  # cek error TypeScript
   role: "Founder Batidao",
   team: "CEO",
   tone: 1,                      // 1–5, menentukan warna
-  image: "/team/ada.jpg",       // file di public/team
+  image: "/team/fathir.jpg",       // file di public/team
   bio: "Teks di balik badge",
   tags: ["CHAMBER", "Zeroks"],  // maksimal 3 yang tampil
   links: [                      // maksimal 3 yang tampil

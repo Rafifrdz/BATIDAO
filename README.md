@@ -48,7 +48,7 @@ Setiap anggota punya bentuk:
   role: "Founder Batidao",      // jabatan
   team: "CEO",                  // baris kecil di bawah role
   tone: 1,                      // warna 1–5 (lihat --chart-1..5 di globals.css)
-  image: "/team/ada.jpg",       // path foto di folder public
+  image: "/team/fathir.jpg",       // path foto di folder public
   bio: "…",                     // teks di balik badge
   tags: ["CHAMBER", "Zeroks"],  // chip di balik badge (maks. 3 tampil)
   links: [                      // link kontak di balik badge (maks. 3 tampil)
