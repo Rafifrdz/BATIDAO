@@ -12,7 +12,7 @@ export function SiteFooter() {
     <footer className="w-screen bg-[#5542ff] py-4 text-black">
       <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
         <p className="text-center text-sm font-light md:text-left">
-          © {new Date().getFullYear()} NO BATIDÃO · Yogyakarta
+          © {new Date().getFullYear()} NO BATIDÃO · Blimbing, Malang
         </p>
 
         <div className="flex justify-center gap-4 md:justify-start">
@@ -31,10 +31,12 @@ export function SiteFooter() {
         </div>
 
         <a
-          href="mailto:halo@batidao.gg"
+          href="https://wa.me/6281234286793"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-center text-sm font-light hover:underline md:text-right"
         >
-          halo@batidao.gg
+          wa.me/6281234286793
         </a>
       </div>
     </footer>

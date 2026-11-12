@@ -31,7 +31,9 @@ export function Contact() {
         </div>
 
         <div className="flex flex-col items-center text-center">
-          <p className="mb-10 font-general text-[10px] uppercase">Gabung Batidão</p>
+          <p className="mb-10 font-general text-[10px] uppercase">
+            Gabung Batidão · Blimbing, Malang
+          </p>
 
           <AnimatedTitle
             title="kita lagi cari <br /> orang yang ni<b>a</b>t."
@@ -40,7 +42,7 @@ export function Contact() {
 
           <Button
             title="kirim portofolio"
-            href="mailto:halo@batidao.gg"
+            href="https://wa.me/6281234286793"
             containerClass="mt-10 cursor-pointer"
           />
         </div>

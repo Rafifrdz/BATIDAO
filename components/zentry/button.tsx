@@ -38,8 +38,15 @@ export function Button({
   );
 
   if (href) {
+    const external = /^https?:\/\//i.test(href);
     return (
-      <a id={id} href={href} className={cls}>
+      <a
+        id={id}
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className={cls}
+      >
         {inner}
       </a>
     );

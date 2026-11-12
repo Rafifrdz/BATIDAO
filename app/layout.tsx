@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NO BATIDÃO — Esports collective dari Yogyakarta",
+  title: "NO BATIDÃO — Esports collective dari Malang",
   description:
     "Dua belas orang, satu grup chat, nol jam tidur. Kenalan sama orang-orang di balik NO BATIDÃO.",
   openGraph: {
